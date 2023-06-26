@@ -6,7 +6,7 @@ import app.utils.Constants;
 import app.utils.Rounder;
 import app.views.OrderView;
 
-public class OrderBController extends BaseController {
+public class OrderBController implements BaseController {
 
     private OrderView view;
     private OrderBModel model;
@@ -17,7 +17,7 @@ public class OrderBController extends BaseController {
     public void handleData() {
 
         view = new OrderView();
-        data = getData();
+        data = view.getData();
         model = new OrderBModel();
 
         double orderCost = getOrderCost();
@@ -29,13 +29,9 @@ public class OrderBController extends BaseController {
         view.getOutput(formOutput());
     }
 
-    private String[] getData() {
-        return
-    }
-
     private double getOrderCost() {
         return model.getOrderCost(Integer.parseInt(data[1]),
-                Double.parseDouble(data[3]));
+                Double.parseDouble(data[2]));
     }
 
     private double getDeliveryCost() {
@@ -44,8 +40,8 @@ public class OrderBController extends BaseController {
     }
 
     private String formOutput() {
-        return "\nOrder " + data[0] + " cost is " +  +
-                " " + orderCost + "\nDelivery cost is " + Constants.CURRENCY +
+        return "\nOrder " + data[0] + " cost is " + Constants.CURRENCY +
+                " " + orderCostRounded + "\nDelivery cost is " + Constants.CURRENCY +
                 " " + deliveryCostRounded;
     }
 }
